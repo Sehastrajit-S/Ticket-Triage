@@ -37,10 +37,10 @@
       <text x="75" y="18.5" font-size="12" font-weight="600" fill="#355146" text-anchor="middle">North MCP compatible</text>
     </g>
     <g transform="translate(362,198)">
-      <rect x="0" y="0" width="130" height="28" rx="14" fill="#f3f0fb" stroke="#4a3aa7" stroke-width="1"/>
-      <text x="65" y="18.5" font-size="12" font-weight="600" fill="#4a3aa7" text-anchor="middle">Real citations</text>
+      <rect x="0" y="0" width="160" height="28" rx="14" fill="#f3f0fb" stroke="#4a3aa7" stroke-width="1"/>
+      <text x="80" y="18.5" font-size="12" font-weight="600" fill="#4a3aa7" text-anchor="middle">Official Cohere SDK</text>
     </g>
-    <g transform="translate(502,198)">
+    <g transform="translate(532,198)">
       <rect x="0" y="0" width="168" height="28" rx="14" fill="#fef6e8" stroke="#c98500" stroke-width="1"/>
       <text x="84" y="18.5" font-size="12" font-weight="600" fill="#a06a00" text-anchor="middle">Eval-harness verified</text>
     </g>
