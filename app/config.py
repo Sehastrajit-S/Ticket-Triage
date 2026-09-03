@@ -15,6 +15,22 @@ class Settings(BaseSettings):
     cohere_embed_dim: int = 1536
     cohere_rerank_model: str = "rerank-v3.5"
 
+    # Cohere via AWS. "cohere" (default) calls api.cohere.com directly with
+    # cohere_api_key above. "bedrock" and "sagemaker" instead call Cohere's own
+    # AwsClientV2 subclasses (BedrockClientV2 / SagemakerClientV2, shipped in the
+    # same `cohere` SDK we already depend on) using standard AWS credential
+    # resolution (env vars, an AWS CLI profile, or an instance/task role) instead
+    # of an API key. Model ids on Bedrock/SageMaker are provider-specific, not
+    # the same strings as cohere_chat_model above; set them explicitly.
+    cohere_provider: str = "cohere"
+    aws_region: str = ""
+    cohere_bedrock_chat_model: str = ""
+    cohere_bedrock_embed_model: str = ""
+    cohere_bedrock_rerank_model: str = ""
+    cohere_sagemaker_chat_endpoint: str = ""
+    cohere_sagemaker_embed_endpoint: str = ""
+    cohere_sagemaker_rerank_endpoint: str = ""
+
     # Database
     database_url: str = "postgresql+asyncpg://triage:triage@localhost:5432/triage"
     database_url_sync: str = "postgresql+psycopg2://triage:triage@localhost:5432/triage"
@@ -31,7 +47,7 @@ class Settings(BaseSettings):
     slack_escalation_channel: str = "#support-escalations"
     north_automations_webhook_url: str = ""
 
-    # North MCP server (mcp_server.py) — trusted_issuers left empty for local dev, where
+    # North MCP server (mcp_server.py). trusted_issuers left empty for local dev, where
     # the SDK decodes X-North-ID-Token without signature verification. Set this to your
     # org's identity provider issuer URL(s) before registering this server with real North.
     north_mcp_trusted_issuers: str = ""

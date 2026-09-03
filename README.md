@@ -1,3 +1,5 @@
+<img src="docs/banner.svg" alt="Ticket Triage Agent: support ticket triage on Cohere Command A, Embed v4, and Rerank 4, with a real North MCP tool server">
+
 # Ticket Triage Agent
 
 A support-ticket triage agent built on Cohere's Command A, Embed v4, and Rerank 4, and, separately, a real [North](https://cohere.com/north) MCP tool server exposing the same capabilities so they can be registered as external actions inside a North Automation.
@@ -45,6 +47,7 @@ The same six tools are also served independently as a **North MCP server** ([mcp
 | FastAPI app, Postgres/pgvector schema, director loop, Slack webhook, tracing, eval harness | Custom code, built to use the above |
 | `north_automation.py`'s `WorkflowOrchestrator` | A stand-in for a real North Automation (no North access to test against) |
 | `mcp_server.py` | **Not** a stand-in. A real MCP server built on Cohere's own [`north-mcp-python-sdk`](https://github.com/cohere-ai/north-mcp-python-sdk), speaking the actual protocol North uses to call external tools |
+| `COHERE_PROVIDER=bedrock`/`sagemaker` in `app/cohere_client/client.py` | Real code against Cohere's own `BedrockClientV2`/`SagemakerClientV2` (shipped in the same `cohere` SDK), unit-tested with mocks, but unverified against a live AWS account, no AWS credentials or Bedrock model access were available while building this |
 
 ## Using this as a North feature
 
@@ -60,6 +63,22 @@ python mcp_server.py
 Verified locally end-to-end with the SDK's own MCP client (session init, auth token, `tools/list`, `tools/call`). Confirmed all six tools register correctly and `search_knowledge_base` round-trips through the real Postgres/pgvector + Rerank 4 pipeline and returns correctly-shaped results.
 
 Auth: North sends an `X-North-ID-Token` header; set `NORTH_MCP_TRUSTED_ISSUERS` (comma-separated identity-provider issuer URLs) before registering this server with a real North workspace so tokens are signature-verified, not just decoded. Left unset here since there's no North access to test signature verification against.
+
+## Running Cohere on AWS (Bedrock / SageMaker)
+
+Cohere's own `cohere` Python SDK, the same package this project already depends on for the direct API, ships `BedrockClientV2` and `SagemakerClientV2` (the older, separate `cohere-aws` package is deprecated in favor of this). Setting `COHERE_PROVIDER=bedrock` (or `sagemaker`) in `.env` switches every `chat()`/`embed()`/`rerank()` call in [app/cohere_client/client.py](app/cohere_client/client.py) to go through AWS instead of `api.cohere.com`, using standard AWS credential resolution (`aws configure`, env vars, or an instance/task role) instead of `COHERE_API_KEY`.
+
+One real technical detail this required handling: `BedrockClientV2`/`SagemakerClientV2` are sync-only, there's no async variant, unlike the direct-API `AsyncClientV2` this project otherwise uses throughout. Calls to them run via `asyncio.to_thread(...)` so they don't block the event loop the rest of the app relies on.
+
+```bash
+COHERE_PROVIDER=bedrock
+AWS_REGION=us-east-1
+COHERE_BEDROCK_CHAT_MODEL=<your Bedrock model id for Command A>
+COHERE_BEDROCK_EMBED_MODEL=<your Bedrock model id for Embed v4>
+COHERE_BEDROCK_RERANK_MODEL=<your Bedrock model id for Rerank>
+```
+
+Honest status: this is real code, not a stub, and it's unit-tested with mocked AWS clients (`tests/test_cohere_client.py`), confirming the right client class is constructed, the right model/endpoint setting is used per call, and calls are correctly dispatched through a thread. It is **not** verified against a live AWS account: no AWS credentials or Bedrock model access were available while building this, so the exact Bedrock/SageMaker model id strings, and whether Rerank is available on Bedrock in your region, need to be confirmed against the AWS console before relying on this path.
 
 ## Evaluation results
 

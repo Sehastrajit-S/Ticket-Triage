@@ -1,0 +1,60 @@
+<svg width="1200" height="280" viewBox="0 0 1200 280" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <clipPath id="bannerClip">
+      <rect x="0" y="0" width="1200" height="280" rx="18"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#bannerClip)">
+    <rect x="0" y="0" width="1200" height="280" fill="#fcfcfb"/>
+
+    <!-- decorative blobs, own palette, not Cohere's -->
+    <circle cx="1010" cy="70" r="150" fill="#223A5E" opacity="0.08"/>
+    <circle cx="1120" cy="210" r="130" fill="#FF6F59" opacity="0.10"/>
+
+    <rect x="0" y="0" width="1200" height="280" rx="18" fill="none" stroke="#dde2e8" stroke-width="1.5"/>
+
+    <!-- Original mark: a ticket tag with a perforation line and a resolved checkmark -->
+    <g transform="translate(56,68)">
+      <rect x="0" y="0" width="112" height="112" rx="24" fill="#223A5E"/>
+      <!-- ticket "text" lines, upper half -->
+      <rect x="22" y="28" width="68" height="7" rx="3.5" fill="#7C94AF"/>
+      <rect x="22" y="42" width="46" height="7" rx="3.5" fill="#7C94AF"/>
+      <!-- perforation tear line -->
+      <line x1="14" y1="60" x2="98" y2="60" stroke="#fcfcfb" stroke-width="3" stroke-dasharray="1,9" stroke-linecap="round"/>
+      <!-- resolved checkmark, lower half -->
+      <path d="M32 82 L50 98 L84 64" fill="none" stroke="#FF6F59" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <!-- Title and subtitle -->
+    <text x="200" y="118" font-size="46" font-weight="700" fill="#0b0b0b">Ticket Triage Agent</text>
+    <text x="202" y="152" font-size="17" fill="#52514e">An AI agent that classifies, routes, drafts, and escalates support</text>
+    <text x="202" y="176" font-size="17" fill="#52514e">tickets, with a matching North MCP tool server</text>
+
+    <!-- Badges -->
+    <g transform="translate(202,198)">
+      <rect x="0" y="0" width="150" height="28" rx="14" fill="#eef3ee" stroke="#355146" stroke-width="1"/>
+      <text x="75" y="18.5" font-size="12" font-weight="600" fill="#355146" text-anchor="middle">North MCP compatible</text>
+    </g>
+    <g transform="translate(362,198)">
+      <rect x="0" y="0" width="130" height="28" rx="14" fill="#f3f0fb" stroke="#4a3aa7" stroke-width="1"/>
+      <text x="65" y="18.5" font-size="12" font-weight="600" fill="#4a3aa7" text-anchor="middle">Real citations</text>
+    </g>
+    <g transform="translate(502,198)">
+      <rect x="0" y="0" width="168" height="28" rx="14" fill="#fef6e8" stroke="#c98500" stroke-width="1"/>
+      <text x="84" y="18.5" font-size="12" font-weight="600" fill="#a06a00" text-anchor="middle">Eval-harness verified</text>
+    </g>
+
+    <!-- Built on Cohere credit, small, secondary, top right -->
+    <g transform="translate(984,28)">
+      <text x="152" y="10" font-size="10.5" fill="#898781" text-anchor="end">Built on</text>
+      <g transform="translate(0,18) scale(0.9)">
+        <path d="M6.81969 11.9081C7.34472 11.9081 8.3891 11.8785 9.8327 11.2692C11.5149 10.559 14.8619 9.2699 17.2762 7.94576C18.9648 7.01963 19.7049 5.79474 19.7049 4.14523C19.705 1.85589 17.8949 0 15.6621 0H6.30704C3.09989 0 0.5 2.66571 0.5 5.95406C0.5 9.2424 2.93427 11.9081 6.81969 11.9081Z" fill="#355146"/>
+        <path d="M8.40234 16.0108C8.40234 14.3989 9.34877 12.9456 10.8008 12.3277L13.7469 11.0741C16.7269 9.80599 20.0069 12.0514 20.0069 15.3595C20.0069 17.9226 17.9801 20.0001 15.4803 19.9994L12.2906 19.9985C10.143 19.998 8.40234 18.2128 8.40234 16.0108Z" fill="#D18EE2"/>
+        <path d="M3.8476 12.6914H3.84753C1.99874 12.6914 0.5 14.2281 0.5 16.1237V16.5683C0.5 18.4639 1.99874 20.0005 3.84753 20.0005H3.8476C5.69639 20.0005 7.19513 18.4639 7.19513 16.5683V16.1237C7.19513 14.2281 5.69639 12.6914 3.8476 12.6914Z" fill="#FF7759"/>
+      </g>
+      <text x="152" y="34" font-size="12.5" font-weight="600" fill="#41474f" text-anchor="end">Command A</text>
+      <text x="152" y="50" font-size="10.5" fill="#898781" text-anchor="end">Embed v4, Rerank 4</text>
+    </g>
+  </g>
+</svg>
