@@ -1,0 +1,84 @@
+<svg width="900" height="470" viewBox="0 0 900 470" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="900" height="470" rx="16" fill="#fcfcfb" stroke="#dde2e8" stroke-width="1.5"/>
+
+  <text x="28" y="34" font-size="16" font-weight="700" fill="#0b0b0b">Evaluation results</text>
+  <text x="28" y="52" font-size="11.5" fill="#52514e">python -m eval.harness, n = 6 labeled tickets, all scores 0 to 1</text>
+
+  <!-- Chart area: x 260 to 800 (width 540), rows start y=78 -->
+  <!-- Gridlines at 0, .25, .5, .75, 1.0 -->
+  <g stroke="#e1e0d9" stroke-width="1">
+    <line x1="260" y1="70" x2="260" y2="430"/>
+    <line x1="395" y1="70" x2="395" y2="430"/>
+    <line x1="530" y1="70" x2="530" y2="430"/>
+    <line x1="665" y1="70" x2="665" y2="430"/>
+    <line x1="800" y1="70" x2="800" y2="430"/>
+  </g>
+  <g font-size="10" fill="#898781" text-anchor="middle">
+    <text x="260" y="446">0</text>
+    <text x="395" y="446">0.25</text>
+    <text x="530" y="446">0.50</text>
+    <text x="665" y="446">0.75</text>
+    <text x="800" y="446">1.00</text>
+  </g>
+
+  <!-- Bars: baseline x=260, scale 540px = 1.0 -->
+  <!-- Row height 45, bar thickness 20, 8 rows starting y=78 -->
+
+  <!-- 1 category_accuracy = 1.000 -->
+  <g>
+    <text x="248" y="93" font-size="12" fill="#0b0b0b" text-anchor="end">Category accuracy</text>
+    <rect x="260" y="83" width="536" height="20" rx="4" fill="#256abf"/>
+    <text x="806" y="97" font-size="12" font-weight="600" fill="#0b0b0b">1.000</text>
+  </g>
+
+  <!-- 2 routing_accuracy = 1.000 -->
+  <g>
+    <text x="248" y="138" font-size="12" fill="#0b0b0b" text-anchor="end">Routing accuracy</text>
+    <rect x="260" y="128" width="536" height="20" rx="4" fill="#256abf"/>
+    <text x="806" y="142" font-size="12" font-weight="600" fill="#0b0b0b">1.000</text>
+  </g>
+
+  <!-- 3 escalation_accuracy = 1.000 -->
+  <g>
+    <text x="248" y="183" font-size="12" fill="#0b0b0b" text-anchor="end">Escalation accuracy</text>
+    <rect x="260" y="173" width="536" height="20" rx="4" fill="#256abf"/>
+    <text x="806" y="187" font-size="12" font-weight="600" fill="#0b0b0b">1.000</text>
+  </g>
+
+  <!-- 4 retrieval_recall_at_k = 1.000 -->
+  <g>
+    <text x="248" y="228" font-size="12" fill="#0b0b0b" text-anchor="end">Retrieval Recall@K</text>
+    <rect x="260" y="218" width="536" height="20" rx="4" fill="#256abf"/>
+    <text x="806" y="232" font-size="12" font-weight="600" fill="#0b0b0b">1.000</text>
+  </g>
+
+  <!-- 5 retrieval_ndcg_at_k = 1.000 -->
+  <g>
+    <text x="248" y="273" font-size="12" fill="#0b0b0b" text-anchor="end">Retrieval NDCG@K</text>
+    <rect x="260" y="263" width="536" height="20" rx="4" fill="#256abf"/>
+    <text x="806" y="277" font-size="12" font-weight="600" fill="#0b0b0b">1.000</text>
+  </g>
+
+  <!-- 6 groundedness_mean = 1.000 -->
+  <g>
+    <text x="248" y="318" font-size="12" fill="#0b0b0b" text-anchor="end">Groundedness (LLM-judge)</text>
+    <rect x="260" y="308" width="536" height="20" rx="4" fill="#256abf"/>
+    <text x="806" y="322" font-size="12" font-weight="600" fill="#0b0b0b">1.000</text>
+  </g>
+
+  <!-- 7 tool_success_rate = 0.984 -->
+  <g>
+    <text x="248" y="363" font-size="12" fill="#0b0b0b" text-anchor="end">Tool success rate</text>
+    <rect x="260" y="353" width="527" height="20" rx="4" fill="#256abf"/>
+    <text x="797" y="367" font-size="12" font-weight="600" fill="#0b0b0b">0.984</text>
+  </g>
+
+  <!-- 8 severity_accuracy = 0.667, flagged -->
+  <g>
+    <text x="248" y="408" font-size="12" fill="#0b0b0b" text-anchor="end">Severity accuracy</text>
+    <rect x="260" y="398" width="360" height="20" rx="4" fill="#fab219"/>
+    <text x="628" y="412" font-size="12" font-weight="600" fill="#0b0b0b">0.667</text>
+    <circle cx="672" cy="408" r="4" fill="#fab219"/>
+    <text x="682" y="412" font-size="10.5" fill="#52514e">flagged: weak point, see caveats</text>
+  </g>
+</svg>

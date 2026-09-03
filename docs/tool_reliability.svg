@@ -1,0 +1,79 @@
+<svg width="900" height="440" viewBox="0 0 900 440" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+  <rect x="0" y="0" width="900" height="440" rx="16" fill="#fcfcfb" stroke="#dde2e8" stroke-width="1.5"/>
+
+  <text x="28" y="34" font-size="16" font-weight="700" fill="#0b0b0b">Per-tool latency and reliability</text>
+  <text x="28" y="52" font-size="11.5" fill="#52514e">Real AuditLog rows from testing, avg latency per call, this is the observability an audit trail gives you that a raw trace stream does not aggregate</text>
+
+  <!-- Chart area: x 210 to 700 (avg latency axis, 0 to 2200ms), rows y=80..380, row height 50 -->
+  <g stroke="#e1e0d9" stroke-width="1">
+    <line x1="210" y1="72" x2="210" y2="392"/>
+    <line x1="335" y1="72" x2="335" y2="392"/>
+    <line x1="460" y1="72" x2="460" y2="392"/>
+    <line x1="585" y1="72" x2="585" y2="392"/>
+    <line x1="710" y1="72" x2="710" y2="392"/>
+  </g>
+  <g font-size="10" fill="#898781" text-anchor="middle">
+    <text x="210" y="408">0ms</text>
+    <text x="335" y="408">500ms</text>
+    <text x="460" y="408">1000ms</text>
+    <text x="585" y="408">1500ms</text>
+    <text x="710" y="408">2000ms</text>
+  </g>
+  <text x="460" y="424" font-size="10.5" fill="#898781" text-anchor="middle">avg latency per tool call</text>
+
+  <!-- scale: 500ms = 125px, so 1ms = 0.25px -->
+
+  <!-- Row 1: search_knowledge_base avg 388ms, success 100% -->
+  <g>
+    <circle cx="30" cy="94" r="4" fill="#0ca30c"/>
+    <text x="42" y="98" font-size="12" fill="#0b0b0b">search_knowledge_base</text>
+    <rect x="210" y="86" width="97" height="18" rx="4" fill="#256abf"/>
+    <text x="313" y="99" font-size="11.5" font-weight="600" fill="#0b0b0b">388ms</text>
+    <text x="370" y="99" font-size="10.5" fill="#898781">100% success (n=14)</text>
+  </g>
+
+  <!-- Row 2: classify_ticket avg 2057ms, success 90.9%, flag p95 -->
+  <g>
+    <circle cx="30" cy="144" r="4" fill="#fab219"/>
+    <text x="42" y="148" font-size="12" fill="#0b0b0b">classify_ticket</text>
+    <rect x="210" y="136" width="514" height="18" rx="4" fill="#256abf"/>
+    <text x="730" y="149" font-size="11.5" font-weight="600" fill="#0b0b0b">2057ms</text>
+    <text x="42" y="166" font-size="10.5" fill="#898781">91% success (n=11), p95 11.4s, one 429 rate-limit retry (Trial key)</text>
+  </g>
+
+  <!-- Row 3: check_policy avg 860ms, success 100%, flag p95 -->
+  <g>
+    <circle cx="30" cy="204" r="4" fill="#0ca30c"/>
+    <text x="42" y="208" font-size="12" fill="#0b0b0b">check_policy</text>
+    <rect x="210" y="196" width="215" height="18" rx="4" fill="#256abf"/>
+    <text x="441" y="209" font-size="11.5" font-weight="600" fill="#0b0b0b">860ms</text>
+    <text x="42" y="226" font-size="10.5" fill="#898781">100% success (n=11), p95 6.1s on its retrieval call</text>
+  </g>
+
+  <!-- Row 4: route_ticket avg 0ms, success 100%, no LLM call -->
+  <g>
+    <circle cx="30" cy="254" r="4" fill="#0ca30c"/>
+    <text x="42" y="258" font-size="12" fill="#0b0b0b">route_ticket</text>
+    <rect x="210" y="246" width="4" height="18" rx="2" fill="#256abf"/>
+    <text x="222" y="259" font-size="11.5" font-weight="600" fill="#0b0b0b">0ms</text>
+    <text x="270" y="259" font-size="10.5" fill="#898781">pure Python rule, no LLM call, this is why escalation is deterministic</text>
+  </g>
+
+  <!-- Row 5: draft_response avg 1892ms, success 100% -->
+  <g>
+    <circle cx="30" cy="304" r="4" fill="#0ca30c"/>
+    <text x="42" y="308" font-size="12" fill="#0b0b0b">draft_response</text>
+    <rect x="210" y="296" width="473" height="18" rx="4" fill="#256abf"/>
+    <text x="689" y="309" font-size="11.5" font-weight="600" fill="#0b0b0b">1892ms</text>
+    <text x="42" y="326" font-size="10.5" fill="#898781">100% success (n=11), native citations, not a hand-rolled prompt</text>
+  </g>
+
+  <!-- Row 6: escalate_ticket avg 593ms, success 100% -->
+  <g>
+    <circle cx="30" cy="354" r="4" fill="#0ca30c"/>
+    <text x="42" y="358" font-size="12" fill="#0b0b0b">escalate_ticket</text>
+    <rect x="210" y="346" width="148" height="18" rx="4" fill="#256abf"/>
+    <text x="364" y="359" font-size="11.5" font-weight="600" fill="#0b0b0b">593ms</text>
+    <text x="410" y="359" font-size="10.5" fill="#898781">100% success (n=5, only fires when routing requires it)</text>
+  </g>
+</svg>
